@@ -1,23 +1,34 @@
 package org.example;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+
 public class Main {
     public static void main(String[] args) {
 
-    Biblioteca minhaBiblioteca = new Biblioteca();
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("biblioteca-pu");
 
-    Livro l1 = new Livro("O Senho dos Anéis");
-    Livro l2 = new Livro("Java para Iniciantes");
-    Livro l3 = new Livro("O Rei de Amarelo");
+        EntityManager em = emf.createEntityManager();;
 
-    minhaBiblioteca.cadastrarLivro(l1);
-    minhaBiblioteca.cadastrarLivro(l2);
+        Livro novoLivro = new Livro("A Sociedade do Anel");
 
-    Usuario u1 = new Usuario("Millie");
+        try {
+            em.getTransaction().begin();
 
-    minhaBiblioteca.realizarEmprestimo(u1, "Java para Iniciantes");
+            em.persist(novoLivro);
 
-    minhaBiblioteca.listarAcervo();
+            em.getTransaction().commit();
 
+            System.out.println("Livro salvo com sucesso");
+
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            em.close();
+            emf.close();
+        }
 
     }
 }

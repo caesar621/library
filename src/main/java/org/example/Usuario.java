@@ -1,9 +1,14 @@
 package org.example;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Usuario {
 
+    @Id
     private String nome;
     private List<Livro> livrosEmPosse;
 
@@ -12,6 +17,7 @@ public class Usuario {
         this.livrosEmPosse = new ArrayList<>();
     }
 
+    // # Métodos
     public void adicionarLivro(Livro livro) {
         if (!livro.getDisponibilidade()) {
             System.out.println("Livro indisponível");
@@ -34,12 +40,22 @@ public class Usuario {
         }
     }
 
+    // #Get e Setters
     public String getNome() {
         return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public List<Livro> getLivrosEmPosse() {
         return livrosEmPosse;
     }
+
+    public void setLivrosEmPosse(List<Livro> livrosEmPosse) {
+        this.livrosEmPosse = livrosEmPosse;
+    }
+
 
 }

@@ -1,10 +1,16 @@
 package org.example;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 import java.util.ArrayList;
 import java.util.List;
 
+
+@Entity
 public class Biblioteca {
 
+    @Id
     private List<Livro> acervo;
 
     public Biblioteca() {
