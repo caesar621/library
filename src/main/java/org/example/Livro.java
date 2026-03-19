@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "livros")
-public class livro {
+public class Livro {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,6 +14,18 @@ public class livro {
     private String autor = "";
     private Boolean disponibilidade = false;
 
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     public Long getId() {
         return id;
     }
@@ -22,9 +34,9 @@ public class livro {
         this.id = id;
     }
 
-    public livro() {}
+    public Livro() {}
 
-    public livro(String titulo) {
+    public Livro(String titulo) {
         this.titulo = titulo;
         this.disponibilidade = true;
     }
