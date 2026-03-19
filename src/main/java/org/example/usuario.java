@@ -1,12 +1,7 @@
 package org.example;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
-public class Usuario {
+public class usuario {
 
 //
 //    private long id;

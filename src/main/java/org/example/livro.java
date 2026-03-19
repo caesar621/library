@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "livros")
-public class Livro {
+public class livro {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,9 +22,9 @@ public class Livro {
         this.id = id;
     }
 
-    public Livro() {}
+    public livro() {}
 
-    public  Livro(String titulo) {
+    public livro(String titulo) {
         this.titulo = titulo;
         this.disponibilidade = true;
     }
