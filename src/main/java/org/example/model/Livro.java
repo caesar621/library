@@ -1,4 +1,4 @@
-package org.example;
+package org.example.model;
 
 import jakarta.persistence.*;
 
@@ -10,8 +10,8 @@ public class Livro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String titulo = "";
-    private String autor = "";
+    private String titulo;
+    private String autor;
     private Boolean disponibilidade = false;
 
     @ManyToOne
