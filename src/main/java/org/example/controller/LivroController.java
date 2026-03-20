@@ -2,6 +2,7 @@ package org.example.controller;
 
 import org.example.model.Livro;
 import org.example.repository.LivroRepository;
+import org.example.service.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,11 +15,11 @@ import java.util.List;
 public class LivroController {
 
     @Autowired
-    private LivroRepository repository;
+    private LivroService service;
 
     @GetMapping
     public List<Livro> listarTodos() {
-        return repository.findAll();
+        return service.buscarTodosOsLivros();
     }
 
 }
