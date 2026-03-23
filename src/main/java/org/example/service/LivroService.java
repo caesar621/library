@@ -18,6 +18,10 @@ public class LivroService {
         return repository.findAll();
     }
 
+    public List<Livro> buscarPorAuthor(String nome) {
+        return repository.findByAutorContainingIgnoreCase(nome);
+    }
+
     public void emprestarLivro(Long livroId, Usuario usuario) {
         Livro livro = repository.findById(livroId)
                 .orElseThrow(() -> new RuntimeException("Livro não encontrado"));

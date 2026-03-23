@@ -1,5 +1,6 @@
 package org.example.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class Usuario {
     private String nome;
 
     @OneToMany(mappedBy = "usuario")
+    @JsonIgnore
     private List<Livro> livros = new ArrayList<>();
 
     public Usuario() {}
