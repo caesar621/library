@@ -62,4 +62,8 @@ public class LivroService {
         return livroRepository.save(livro);
     }
 
+    public List<Livro> buscarPorDisponibilidade(Boolean disponibilidade) {
+        return livroRepository.findByDisponibilidade(disponibilidade);
+    }
+
 }

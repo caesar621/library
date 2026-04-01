@@ -16,7 +16,10 @@ public class LivroController {
     private LivroService service;
 
     @GetMapping
-    public List<Livro> listarTodos() {
+    public List<Livro> listarLivros(@RequestParam(name = "disponibilidade", required = false) Boolean disponibilidade) {
+        if (disponibilidade != null) {
+            return service.buscarPorDisponibilidade(disponibilidade);
+        }
         return service.buscarTodosOsLivros();
     }
 
