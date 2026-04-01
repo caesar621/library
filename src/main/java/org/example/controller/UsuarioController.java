@@ -24,4 +24,9 @@ public class UsuarioController {
         return service.criarUsuario(novoUsuario);
     }
 
+    @DeleteMapping("/{usuarioId}")
+    public String deletarUsuario(@PathVariable Long usuarioId){
+        return service.deletarUsuario(usuarioId);
+    }
+
 }

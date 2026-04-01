@@ -21,5 +21,18 @@ public class UsuarioService {
         return usuarioRepository.save(novoUsuario);
     }
 
+    public String deletarUsuario(Long usuarioId) {
+        Usuario usuario = usuarioRepository.findById(usuarioId)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+
+        if(!usuario.getLivros().isEmpty()) {
+            throw new RuntimeException("Não é possível deletar esse usuário, pois o mesmo ainda possui livros emprestados");
+        }
+
+        usuarioRepository.deleteById(usuarioId);
+
+        return "Usuário deletado com sucesso";
+    }
+
 
 }
