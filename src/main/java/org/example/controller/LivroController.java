@@ -4,10 +4,7 @@ import org.example.model.Livro;
 import org.example.repository.LivroRepository;
 import org.example.service.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,4 +25,13 @@ public class LivroController {
         return service.buscarPorAuthor(nome);
     }
 
+    @PutMapping("/{livroId}")
+    public void devolverLivro(@PathVariable Long livroId) {
+        service.devolverLivro(livroId);
+    }
+
+    @PutMapping("/{livroId}/emprestar/{usuarioId}")
+    public void emprestarLivro(@PathVariable Long livroId, @PathVariable Long usuarioId) {
+        service.emprestarLivro(livroId, usuarioId);
+    }
 }
