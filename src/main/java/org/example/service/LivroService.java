@@ -55,4 +55,11 @@ public class LivroService {
 
     }
 
+    public Livro salvarNovoLivro(Livro livro) {
+        livro.setDisponibilidade(true);
+        livro.setUsuario(null);
+
+        return livroRepository.save(livro);
+    }
+
 }

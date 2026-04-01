@@ -34,4 +34,9 @@ public class LivroController {
     public Livro emprestarLivro(@PathVariable Long livroId, @PathVariable Long usuarioId) {
         return service.emprestarLivro(livroId, usuarioId);
     }
+
+    @PostMapping
+    public Livro criarLivro(@RequestBody Livro novoLivro) {
+        return service.salvarNovoLivro(novoLivro);
+    }
 }
