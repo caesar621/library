@@ -25,13 +25,13 @@ public class LivroController {
         return service.buscarPorAuthor(nome);
     }
 
-    @PutMapping("/{livroId}")
-    public void devolverLivro(@PathVariable Long livroId) {
-        service.devolverLivro(livroId);
+    @PutMapping("/{livroId}/devolver")
+    public Livro devolverLivro(@PathVariable Long livroId) {
+        return service.devolverLivro(livroId);
     }
 
     @PutMapping("/{livroId}/emprestar/{usuarioId}")
-    public void emprestarLivro(@PathVariable Long livroId, @PathVariable Long usuarioId) {
-        service.emprestarLivro(livroId, usuarioId);
+    public Livro emprestarLivro(@PathVariable Long livroId, @PathVariable Long usuarioId) {
+        return service.emprestarLivro(livroId, usuarioId);
     }
 }

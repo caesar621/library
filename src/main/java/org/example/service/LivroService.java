@@ -25,20 +25,21 @@ public class LivroService {
         return livroRepository.findByAutorContainingIgnoreCase(nome);
     }
 
-    public void devolverLivro(Long livroId) {
+    public Livro devolverLivro(Long livroId) {
         Livro livroDevolvido = livroRepository.findById(livroId)
                 .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
 
         if (!livroDevolvido.getDisponibilidade()) {
             livroDevolvido.setUsuario(null);
             livroDevolvido.setDisponibilidade(true);
-            livroRepository.save(livroDevolvido);
+            return livroRepository.save(livroDevolvido);
+        } else {
+            throw new RuntimeException("Este livro já se encontra disponível");
         }
-
 
     }
 
-    public void emprestarLivro(Long livroId, Long usuarioId) {
+    public Livro emprestarLivro(Long livroId, Long usuarioId) {
         Livro livro = livroRepository.findById(livroId)
                 .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
         if (!livro.getDisponibilidade()) {
@@ -50,7 +51,7 @@ public class LivroService {
 
         livro.setUsuario(usuario);
         livro.setDisponibilidade(false);
-        livroRepository.save(livro);
+        return livroRepository.save(livro);
 
     }
 
