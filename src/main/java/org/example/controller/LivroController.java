@@ -42,4 +42,11 @@ public class LivroController {
     public Livro criarLivro(@RequestBody Livro novoLivro) {
         return service.salvarNovoLivro(novoLivro);
     }
+
+    @PutMapping("/{livroId}")
+    public Livro atualizarLivro(@RequestBody Livro livroAtualizado) { return service.atualizarLivro(livroAtualizado); }
+
+    @GetMapping("/{livroId}")
+    public Livro listarLivroEspecifico(@PathVariable Long livroId) { return service.listarLivroEspecifico(livroId); }
+
 }

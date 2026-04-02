@@ -66,4 +66,18 @@ public class LivroService {
         return livroRepository.findByDisponibilidade(disponibilidade);
     }
 
+    public Livro atualizarLivro(Livro livroAtualizado) {
+        Livro livro = livroRepository.findById(livroAtualizado.getId())
+                .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
+
+        livro.setTitulo(livroAtualizado.getTitulo());
+        return livroRepository.save(livro);
+    }
+
+    public Livro listarLivroEspecifico(Long livroId) {
+
+        return livroRepository.findById(livroId)
+                .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
+    }
+
 }
