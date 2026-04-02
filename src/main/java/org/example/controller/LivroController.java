@@ -1,5 +1,7 @@
 package org.example.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.example.model.Livro;
 import org.example.repository.LivroRepository;
 import org.example.service.LivroService;
@@ -10,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/livros")
+@Tag(name = "Livros")
 public class LivroController {
 
     @Autowired
@@ -32,7 +35,7 @@ public class LivroController {
     }
 
     @PostMapping
-    public Livro criarLivro(@RequestBody Livro novoLivro) {
+    public Livro criarLivro(@Valid @RequestBody Livro novoLivro) {
         return service.salvarNovoLivro(novoLivro);
     }
 

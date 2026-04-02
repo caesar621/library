@@ -1,6 +1,9 @@
 package org.example.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "livros")
@@ -10,10 +13,15 @@ public class Livro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "O título é obrigatório")
+    @Size(min = 2, max = 100, message = "O título deve ter entre 2 a 100 caracteres")
     private String titulo;
+
+    @NotBlank(message = "O autor é obrigatório")
     private String autor;
     private Boolean disponibilidade = false;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;

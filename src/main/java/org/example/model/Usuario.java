@@ -1,7 +1,9 @@
 package org.example.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +16,11 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotBlank(message = "O nome é obrigatório")
     private String nome;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "usuario")
-    @JsonIgnore
     private List<Livro> livros = new ArrayList<>();
 
     public Usuario() {}
