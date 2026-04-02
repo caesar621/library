@@ -23,9 +23,17 @@ public class LivroController {
         return service.buscarTodosOsLivros();
     }
 
+    @GetMapping("/{livroId}")
+    public Livro listarLivroEspecifico(@PathVariable Long livroId) { return service.listarLivroEspecifico(livroId); }
+
     @GetMapping("/autor/{nome}")
     public List<Livro> buscarPorAutor(@PathVariable String nome) {
         return service.buscarPorAuthor(nome);
+    }
+
+    @PostMapping
+    public Livro criarLivro(@RequestBody Livro novoLivro) {
+        return service.salvarNovoLivro(novoLivro);
     }
 
     @PutMapping("/{livroId}/devolver")
@@ -38,15 +46,10 @@ public class LivroController {
         return service.emprestarLivro(livroId, usuarioId);
     }
 
-    @PostMapping
-    public Livro criarLivro(@RequestBody Livro novoLivro) {
-        return service.salvarNovoLivro(novoLivro);
-    }
-
     @PutMapping("/{livroId}")
-    public Livro atualizarLivro(@RequestBody Livro livroAtualizado) { return service.atualizarLivro(livroAtualizado); }
+    public Livro atualizarLivro(@PathVariable Long livroId, @RequestBody Livro livroAtualizado) { return service.atualizarLivro(livroId, livroAtualizado); }
 
-    @GetMapping("/{livroId}")
-    public Livro listarLivroEspecifico(@PathVariable Long livroId) { return service.listarLivroEspecifico(livroId); }
+    @DeleteMapping("/{livroId}")
+    public String deletarLivro(@PathVariable Long livroId) { return service.deletarLivro(livroId); }
 
 }

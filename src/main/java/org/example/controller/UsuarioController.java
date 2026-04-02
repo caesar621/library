@@ -19,6 +19,11 @@ public class UsuarioController {
         return service.listarUsuarios();
     }
 
+    @PutMapping("/{usuarioId}")
+    public Usuario atualizarUsuario(@PathVariable Long usuarioId, @RequestBody Usuario usuarioNome) {
+        return service.atualizarUsuario(usuarioId, usuarioNome);
+    }
+
     @PostMapping
     public Usuario criarUsuario(@RequestBody Usuario novoUsuario) {
         return service.criarUsuario(novoUsuario);
@@ -27,11 +32,6 @@ public class UsuarioController {
     @DeleteMapping("/{usuarioId}")
     public String deletarUsuario(@PathVariable Long usuarioId){
         return service.deletarUsuario(usuarioId);
-    }
-
-    @PutMapping("/{usuarioId}")
-    public Usuario atualizarUsuario(@PathVariable Long usuarioId, @RequestBody Usuario usuarioNome) {
-        return service.atualizarUsuario(usuarioId, usuarioNome);
     }
 
 }

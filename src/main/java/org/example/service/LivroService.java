@@ -21,8 +21,41 @@ public class LivroService {
         return livroRepository.findAll();
     }
 
+    public Livro listarLivroEspecifico(Long livroId) {
+
+        return livroRepository.findById(livroId)
+                .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
+    }
+
+    public List<Livro> buscarPorDisponibilidade(Boolean disponibilidade) {
+        return livroRepository.findByDisponibilidade(disponibilidade);
+    }
+
     public List<Livro> buscarPorAuthor(String nome) {
         return livroRepository.findByAutorContainingIgnoreCase(nome);
+    }
+
+
+    public Livro salvarNovoLivro(Livro livro) {
+        livro.setDisponibilidade(true);
+        livro.setUsuario(null);
+
+        return livroRepository.save(livro);
+    }
+
+    public Livro atualizarLivro(Long livroId, Livro livroAtualizado) {
+        Livro livro = livroRepository.findById(livroId)
+                .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
+
+        if (livroAtualizado.getTitulo() != null) {
+            livro.setTitulo(livroAtualizado.getTitulo());
+        }
+
+        if (livroAtualizado.getAutor() != null) {
+            livro.setAutor(livroAtualizado.getAutor());
+        }
+
+        return livroRepository.save(livro);
     }
 
     public Livro devolverLivro(Long livroId) {
@@ -55,29 +88,14 @@ public class LivroService {
 
     }
 
-    public Livro salvarNovoLivro(Livro livro) {
-        livro.setDisponibilidade(true);
-        livro.setUsuario(null);
+    public String deletarLivro(Long livroId) {
 
-        return livroRepository.save(livro);
-    }
-
-    public List<Livro> buscarPorDisponibilidade(Boolean disponibilidade) {
-        return livroRepository.findByDisponibilidade(disponibilidade);
-    }
-
-    public Livro atualizarLivro(Livro livroAtualizado) {
-        Livro livro = livroRepository.findById(livroAtualizado.getId())
+        Livro livro = livroRepository.findById(livroId)
                 .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
 
-        livro.setTitulo(livroAtualizado.getTitulo());
-        return livroRepository.save(livro);
-    }
+        livroRepository.deleteById(livroId);
 
-    public Livro listarLivroEspecifico(Long livroId) {
-
-        return livroRepository.findById(livroId)
-                .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
+        return "Livro deletado com sucesso";
     }
 
 }
