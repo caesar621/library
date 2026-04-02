@@ -29,4 +29,9 @@ public class UsuarioController {
         return service.deletarUsuario(usuarioId);
     }
 
+    @PutMapping("/{usuarioId}")
+    public Usuario atualizarUsuario(@PathVariable Long usuarioId, @RequestBody Usuario usuarioNome) {
+        return service.atualizarUsuario(usuarioId, usuarioNome);
+    }
+
 }

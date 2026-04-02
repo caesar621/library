@@ -34,5 +34,13 @@ public class UsuarioService {
         return "Usuário deletado com sucesso";
     }
 
+    public Usuario atualizarUsuario(Long usuarioId, Usuario usuarioNome) {
+        Usuario usuario = usuarioRepository.findById(usuarioId)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+
+        usuario.setNome(usuarioNome.getNome());
+        return usuarioRepository.save(usuario);
+    }
+
 
 }
