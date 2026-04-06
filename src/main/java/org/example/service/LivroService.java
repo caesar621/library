@@ -5,8 +5,9 @@ import org.example.model.Usuario;
 import org.example.repository.LivroRepository;
 import org.example.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -17,8 +18,8 @@ public class LivroService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public List<Livro> buscarTodosOsLivros() {
-        return livroRepository.findAll();
+    public Page<Livro> buscarTodosOsLivros(Pageable paginacao) {
+        return livroRepository.findAll(paginacao);
     }
 
     public Livro listarLivroEspecifico(Long livroId) {
@@ -27,8 +28,8 @@ public class LivroService {
                 .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
     }
 
-    public List<Livro> buscarPorDisponibilidade(Boolean disponibilidade) {
-        return livroRepository.findByDisponibilidade(disponibilidade);
+    public Page<Livro> buscarPorDisponibilidade(Boolean disponibilidade, Pageable paginacao) {
+        return livroRepository.findByDisponibilidade(disponibilidade, paginacao);
     }
 
     public List<Livro> buscarPorAuthor(String nome) {

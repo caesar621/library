@@ -6,6 +6,9 @@ import org.example.model.Livro;
 import org.example.repository.LivroRepository;
 import org.example.service.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,11 +22,11 @@ public class LivroController {
     private LivroService service;
 
     @GetMapping
-    public List<Livro> listarLivros(@RequestParam(name = "disponibilidade", required = false) Boolean disponibilidade) {
+    public Page<Livro> listarLivros(@RequestParam(name = "disponibilidade", required = false) Boolean disponibilidade, @PageableDefault(size = 10, sort = "titulo") Pageable paginacao) {
         if (disponibilidade != null) {
-            return service.buscarPorDisponibilidade(disponibilidade);
+            return service.buscarPorDisponibilidade(disponibilidade, paginacao);
         }
-        return service.buscarTodosOsLivros();
+        return service.buscarTodosOsLivros(paginacao);
     }
 
     @GetMapping("/{livroId}")

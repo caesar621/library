@@ -1,6 +1,8 @@
 package org.example.repository;
 
 import org.example.model.Livro;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +14,6 @@ public interface LivroRepository extends JpaRepository<Livro, Long> {
 
     List<Livro> findByAutorContainingIgnoreCase(String autor);
 
-    List<Livro> findByDisponibilidade(Boolean disponibilidade);
+    Page<Livro> findByDisponibilidade(Boolean disponibilidade, Pageable paginacao);
 
 }
