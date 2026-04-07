@@ -33,8 +33,8 @@ public class LivroController {
     public Livro listarLivroEspecifico(@PathVariable Long livroId) { return service.listarLivroEspecifico(livroId); }
 
     @GetMapping("/autor/{nome}")
-    public List<Livro> buscarPorAutor(@PathVariable String nome) {
-        return service.buscarPorAuthor(nome);
+    public Page<Livro> buscarPorAutor(@PathVariable String nome, @PageableDefault(size = 10, sort = "titulo") Pageable paginacao) {
+        return service.buscarPorAuthor(nome, paginacao);
     }
 
     @PostMapping

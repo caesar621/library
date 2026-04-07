@@ -4,6 +4,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.example.model.Usuario;
 import org.example.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,8 +20,8 @@ public class UsuarioController {
     private UsuarioService service;
 
     @GetMapping
-    public List<Usuario> listarTodosUsuarios() {
-        return service.listarUsuarios();
+    public Page<Usuario> listarTodosUsuarios(@PageableDefault(size = 10, sort = "nome")Pageable paginacao) {
+        return service.listarUsuarios(paginacao);
     }
 
     @PutMapping("/{usuarioId}")

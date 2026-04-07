@@ -32,8 +32,8 @@ public class LivroService {
         return livroRepository.findByDisponibilidade(disponibilidade, paginacao);
     }
 
-    public List<Livro> buscarPorAuthor(String nome) {
-        return livroRepository.findByAutorContainingIgnoreCase(nome);
+    public Page<Livro> buscarPorAuthor(String nome, Pageable paginacao) {
+        return livroRepository.findByAutorContainingIgnoreCase(nome, paginacao);
     }
 
 
