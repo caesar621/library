@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,23 +21,23 @@ public class UsuarioController {
     private UsuarioService service;
 
     @GetMapping
-    public Page<Usuario> listarTodosUsuarios(@PageableDefault(size = 10, sort = "nome")Pageable paginacao) {
-        return service.listarUsuarios(paginacao);
+    public ResponseEntity<Page<Usuario>> listarTodosUsuarios(@PageableDefault(size = 10, sort = "nome")Pageable paginacao) {
+        return ResponseEntity.ok(service.listarUsuarios(paginacao));
     }
 
     @PutMapping("/{usuarioId}")
-    public Usuario atualizarUsuario(@PathVariable Long usuarioId, @RequestBody Usuario usuarioNome) {
-        return service.atualizarUsuario(usuarioId, usuarioNome);
+    public ResponseEntity<Usuario> atualizarUsuario(@PathVariable Long usuarioId, @RequestBody Usuario usuarioNome) {
+        return ResponseEntity.ok(service.atualizarUsuario(usuarioId, usuarioNome));
     }
 
     @PostMapping
-    public Usuario criarUsuario(@RequestBody Usuario novoUsuario) {
-        return service.criarUsuario(novoUsuario);
+    public ResponseEntity<Usuario> criarUsuario(@RequestBody Usuario novoUsuario) {
+        return ResponseEntity.ok(service.criarUsuario(novoUsuario));
     }
 
     @DeleteMapping("/{usuarioId}")
-    public String deletarUsuario(@PathVariable Long usuarioId){
-        return service.deletarUsuario(usuarioId);
+    public ResponseEntity<String> deletarUsuario(@PathVariable Long usuarioId){
+        return ResponseEntity.ok(service.deletarUsuario(usuarioId));
     }
 
 }

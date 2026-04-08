@@ -1,5 +1,6 @@
 package org.example.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.example.model.Livro;
 import org.example.model.Usuario;
 import org.example.repository.LivroRepository;
@@ -25,7 +26,7 @@ public class LivroService {
     public Livro listarLivroEspecifico(Long livroId) {
 
         return livroRepository.findById(livroId)
-                .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
+                .orElseThrow(() -> new EntityNotFoundException("Livro não encontrado"));
     }
 
     public Page<Livro> buscarPorDisponibilidade(Boolean disponibilidade, Pageable paginacao) {

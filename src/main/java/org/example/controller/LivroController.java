@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import ch.qos.logback.core.pattern.util.RegularEscapeUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.example.model.Livro;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,40 +24,40 @@ public class LivroController {
     private LivroService service;
 
     @GetMapping
-    public Page<Livro> listarLivros(@RequestParam(name = "disponibilidade", required = false) Boolean disponibilidade, @PageableDefault(size = 10, sort = "titulo") Pageable paginacao) {
+    public ResponseEntity<Page<Livro>> listarLivros(@RequestParam(name = "disponibilidade", required = false) Boolean disponibilidade, @PageableDefault(size = 10, sort = "titulo") Pageable paginacao) {
         if (disponibilidade != null) {
-            return service.buscarPorDisponibilidade(disponibilidade, paginacao);
+            return ResponseEntity.ok(service.buscarPorDisponibilidade(disponibilidade, paginacao));
         }
-        return service.buscarTodosOsLivros(paginacao);
+        return ResponseEntity.ok(service.buscarTodosOsLivros(paginacao));
     }
 
     @GetMapping("/{livroId}")
-    public Livro listarLivroEspecifico(@PathVariable Long livroId) { return service.listarLivroEspecifico(livroId); }
+    public ResponseEntity<Livro> listarLivroEspecifico(@PathVariable Long livroId) { return ResponseEntity.ok(service.listarLivroEspecifico(livroId)); }
 
     @GetMapping("/autor/{nome}")
-    public Page<Livro> buscarPorAutor(@PathVariable String nome, @PageableDefault(size = 10, sort = "titulo") Pageable paginacao) {
-        return service.buscarPorAuthor(nome, paginacao);
+    public ResponseEntity<Page<Livro>> buscarPorAutor(@PathVariable String nome, @PageableDefault(size = 10, sort = "titulo") Pageable paginacao) {
+        return ResponseEntity.ok(service.buscarPorAuthor(nome, paginacao));
     }
 
     @PostMapping
-    public Livro criarLivro(@Valid @RequestBody Livro novoLivro) {
-        return service.salvarNovoLivro(novoLivro);
+    public ResponseEntity<Livro> criarLivro(@Valid @RequestBody Livro novoLivro) {
+        return ResponseEntity.ok(service.salvarNovoLivro(novoLivro));
     }
 
     @PutMapping("/{livroId}/devolver")
-    public Livro devolverLivro(@PathVariable Long livroId) {
-        return service.devolverLivro(livroId);
+    public ResponseEntity<Livro> devolverLivro(@PathVariable Long livroId) {
+        return ResponseEntity.ok(service.devolverLivro(livroId));
     }
 
     @PutMapping("/{livroId}/emprestar/{usuarioId}")
-    public Livro emprestarLivro(@PathVariable Long livroId, @PathVariable Long usuarioId) {
-        return service.emprestarLivro(livroId, usuarioId);
+    public ResponseEntity<Livro> emprestarLivro(@PathVariable Long livroId, @PathVariable Long usuarioId) {
+        return ResponseEntity.ok(service.emprestarLivro(livroId, usuarioId));
     }
 
     @PutMapping("/{livroId}")
-    public Livro atualizarLivro(@PathVariable Long livroId, @RequestBody Livro livroAtualizado) { return service.atualizarLivro(livroId, livroAtualizado); }
+    public ResponseEntity <Livro> atualizarLivro(@PathVariable Long livroId, @RequestBody Livro livroAtualizado) { return ResponseEntity.ok(service.atualizarLivro(livroId, livroAtualizado)); }
 
     @DeleteMapping("/{livroId}")
-    public String deletarLivro(@PathVariable Long livroId) { return service.deletarLivro(livroId); }
+    public ResponseEntity<String> deletarLivro(@PathVariable Long livroId) { return ResponseEntity.ok(service.deletarLivro(livroId)); }
 
 }
