@@ -3,9 +3,11 @@ package org.example.service;
 import jakarta.persistence.EntityNotFoundException;
 import org.example.model.Usuario;
 import org.example.repository.UsuarioRepository;
+import org.example.security.DadosCadastroUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,11 +18,18 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public Page<Usuario> listarUsuarios(Pageable paginacao) {
         return usuarioRepository.findAll(paginacao);
     }
 
-    public Usuario criarUsuario(Usuario novoUsuario) {
+    public Usuario criarUsuario(DadosCadastroUsuario dados) {
+
+        String senhaCrypto = passwordEncoder.encode(dados.senha());
+
+        Usuario novoUsuario = new Usuario(dados.nome(), dados.login(), senhaCrypto);
         return usuarioRepository.save(novoUsuario);
     }
 

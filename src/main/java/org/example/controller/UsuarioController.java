@@ -2,6 +2,7 @@ package org.example.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.example.model.Usuario;
+import org.example.security.DadosCadastroUsuario;
 import org.example.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -31,8 +32,8 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<Usuario> criarUsuario(@RequestBody Usuario novoUsuario) {
-        return ResponseEntity.ok(service.criarUsuario(novoUsuario));
+    public ResponseEntity<Usuario> criarUsuario(@RequestBody DadosCadastroUsuario dados) {
+        return ResponseEntity.ok(service.criarUsuario(dados));
     }
 
     @DeleteMapping("/{usuarioId}")
