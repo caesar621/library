@@ -12,7 +12,7 @@ import java.util.List;
 public interface LivroRepository extends JpaRepository<Livro, Long> {
     List<Livro> findByTituloContainingIgnoreCase(String titulo);
 
-    List<Livro> findByAutorContainingIgnoreCase(String autor);
+    Page<Livro> findByAutorContainingIgnoreCase(String autor, Pageable paginacao);
 
     Page<Livro> findByDisponibilidade(Boolean disponibilidade, Pageable paginacao);
 
