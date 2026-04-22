@@ -3,7 +3,7 @@ package org.example.service;
 import jakarta.persistence.EntityNotFoundException;
 import org.example.model.Usuario;
 import org.example.repository.UsuarioRepository;
-import org.example.infra.security.DadosCadastroUsuario;
+import org.example.dto.DadosCadastroUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

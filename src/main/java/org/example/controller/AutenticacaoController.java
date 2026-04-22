@@ -1,7 +1,7 @@
 package org.example.controller;
 
 import jakarta.validation.Valid;
-import org.example.infra.security.DadosAutenticacao;
+import org.example.dto.DadosAutenticacao;
 import org.example.infra.security.TokenService;
 import org.example.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package org.example.infra.security;
+package org.example.dto;
 
 public record DadosAutenticacao(String login, String senha) {
 }

@@ -2,7 +2,7 @@ package org.example.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.example.model.Usuario;
-import org.example.infra.security.DadosCadastroUsuario;
+import org.example.dto.DadosCadastroUsuario;
 import org.example.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
